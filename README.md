@@ -37,7 +37,7 @@ category_rules:
   - keywords: ["量化"]
     subdir: 量化/
   - keywords: ["人工智能", "AI"]
-    subdir: AI/
+    subdir: 人工智能个人笔记/
   # ... 按需添加
 ```
 

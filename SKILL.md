@@ -174,7 +174,7 @@ Always verify duration with ffprobe after download.
 Unified command — finds the downloaded audio/video file regardless of extension:
 
 ```bash
-cd /tmp && ffmpeg -y -i $(ls video_audio.* video_video.* 2>/dev/null | head -1) -vn -acodec pcm_s16le -ar 16000 -ac 1 video_audio.wav
+AUDIO_FILE=$(find /tmp -maxdepth 1 -name 'video_audio.*' -o -name 'video_video.*' 2>/dev/null | head -1) && ffmpeg -y -i "$AUDIO_FILE" -vn -acodec pcm_s16le -ar 16000 -ac 1 /tmp/video_audio.wav
 ```
 
 This handles all three platforms:
@@ -184,7 +184,7 @@ This handles all three platforms:
 
 Verify:
 ```bash
-ffprobe -v quiet -show_entries format=duration -of csv=p=0 video_audio.wav
+ffprobe -v quiet -show_entries format=duration -of csv=p=0 /tmp/video_audio.wav
 ```
 
 ## Step 4: Transcribe with Whisper
