@@ -189,13 +189,22 @@ ffprobe -v quiet -show_entries format=duration -of csv=p=0 /tmp/video_audio.wav
 
 ## Step 4: Transcribe with Whisper
 
+**Model selection rule** (based on video duration):
+
+| 时长 | 模型 | 预计耗时 | 准确率 |
+|------|------|---------|--------|
+| ≤ 10 分钟 | `small` | 2-8 分钟 | 较高 |
+| > 10 分钟 | `tiny` | 1-3 分钟 | 可接受（偶有错字） |
+
+判断方式：Step 1 或 Step 3（ffprobe）获取时长后，按上表选择模型。
+
 Use VTT format (includes timestamps) for screenshot timing:
 
 ```bash
-cd /tmp && rm -rf /tmp/whisper_out && python3 -m whisper video_audio.wav --model small --language Chinese --output_dir /tmp/whisper_out --output_format vtt txt
+cd /tmp && rm -rf /tmp/whisper_out && python3 -m whisper video_audio.wav --model MODEL --language Chinese --output_dir /tmp/whisper_out --output_format vtt txt
 ```
 
-**Model choice**: `small` (~466MB) recommended for acceptable Chinese accuracy. `tiny` (~72MB) is faster but produces heavy garbling (错字). Use `tiny` only for quick previews; re-run with `small` for the final note.
+**Model reference**: `tiny` (~72MB) vs `small` (~466MB). `small` is more accurate but much slower on long audio. For note-taking purposes, `tiny` quality is sufficient for videos over 10 minutes.
 
 **Accuracy disclaimer**: Even `small` model produces noticeable errors in Chinese transcription, especially for technical terms, proper names, and code snippets. Always cross-check important data, numbers, and technical claims against the video itself. The transcript is a note-taking aid, not an authoritative reference.
 
