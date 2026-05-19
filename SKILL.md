@@ -78,7 +78,7 @@ If any check fails, return to Setup section.
 
 | URL Pattern | Platform | Metadata Source | Download Method |
 |-------------|----------|-----------------|-----------------|
-| `bilibili.com/video/BV*` | B站 | B站 API | yt-dlp + Chrome cookies |
+| `bilibili.com/video/BV*` / `bilibili.com/cheese/*` | B站 | B站 API 或 yt-dlp | yt-dlp + Chrome cookies |
 | `douyin.com/video/*` / `v.douyin.com/*` / `iesdouyin.com/*` | 抖音 | iesdouyin.com share page ROUTER_DATA | curl direct (no auth) |
 | `youtube.com/watch?v=*` / `youtu.be/*` | YouTube | yt-dlp | yt-dlp (built-in) |
 
